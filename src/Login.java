@@ -1,11 +1,10 @@
-/**
- * Login class
- * Handles user authentication and login status messages
- */
 public class Login {
 
     public Boolean loginUser(Registration registeredUser, String enteredUsername, String enteredPassword) {
-        if (registeredUser.getUsername() == null || registeredUser.getPassword() == null) {
+        if (registeredUser == null || registeredUser.getUsername() == null || registeredUser.getPassword() == null) {
+            return false;
+        }
+        if (enteredUsername == null || enteredPassword == null) {
             return false;
         }
         return enteredUsername.equals(registeredUser.getUsername()) &&

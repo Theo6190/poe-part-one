@@ -1,14 +1,7 @@
-/**
- * Password class
- * Handles validation for username, password, and cell phone number
- * Regex reference: Oracle Java Documentation - Pattern Class, 2026
- https://docs.oracle.com/javase/8/docs/api/java/util/regex/Pattern.html
- */
 public class PASSWORD {
 
-    // Boolean methods for JUnit assertTrue/assertFalse tests
     public Boolean checkUserName(String username) {
-        return username != null && username.contains("_") && username.length() <= 5;
+        return username!= null && username.contains("_") && username.length() <= 5;
     }
 
     public Boolean checkPasswordComplexity(String password) {
@@ -19,10 +12,9 @@ public class PASSWORD {
 
     public Boolean checkCellPhoneNumber(String cellNumber) {
         String cellPattern = "^\\+27\\d{9}$";
-        return cellNumber != null && cellNumber.matches(cellPattern);
+        return cellNumber!= null && cellNumber.matches(cellPattern);
     }
 
-    // String methods to return exact POE messages for assertEquals tests
     public String getUserNameMessage(String username) {
         if (checkUserName(username)) {
             return "Username successfully captured.";
