@@ -35,12 +35,17 @@ public class Message {
         }
     }
 
+    // Updated to POE standard: First 10 chars + Last 3 of ID + Last 2 of recipient
     public String createMessageHash() {
-        String idPart = messageID.substring(0, 2);
-        String[] words = messageText.trim().split("\\s+");
-        String firstWord = words[0].toUpperCase();
-        String lastWord = words[words.length - 1].toUpperCase();
-        return idPart + ":" + (messageText.length() % 10) + ":" + firstWord + lastWord;
+        String first10 = messageText.length() >= 10 ?
+                messageText.substring(0,10).toUpperCase() :
+                messageText.toUpperCase();
+
+        String last3ID = messageID.substring(messageID.length() - 3);
+
+        String last2Rec = recipient.substring(recipient.length() - 2).toUpperCase();
+
+        return first10 + ":" + last3ID + ":" + last2Rec;
     }
 
     public String sentMessage(int option) {
@@ -59,7 +64,7 @@ public class Message {
         return totalMessagesSent;
     }
 
-    // Add these 4 getters below
+    // Getters
     public String getMessageID() {
         return messageID;
     }
@@ -74,5 +79,14 @@ public class Message {
 
     public String getMessageText() {
         return messageText;
+    }
+
+    // NEW: Setters needed for loading from JSON in Part 3
+    public void setMessageID(String id) {
+        this.messageID = id;
+    }
+
+    public void setMessageHash(String hash) {
+        this.messageHash = hash;
     }
 }
